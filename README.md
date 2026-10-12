@@ -11,7 +11,7 @@ KnowledgeBase format (`course_manifest.json`, `<lesson>.lesson/` directories).
 
 ## Use in Dolphy
 
-Courses screen → **Add from Git** → `https://github.com/dolphy-app/dolphy-courses`. The branch field can stay empty
+Courses screen → **Add from Git** → `https://github.com/dolphy-app/courses`. The branch field can stay empty
 (default branch). Update the course later from **Settings → Library → Repositories**.
 
 The `javascript` course uses two exercise types shipped with the app: `dolphy.choice` (multiple choice) and
