@@ -1,60 +1,46 @@
-# Dolphy courses
+<p align="center">
+  <img src=".github/logo.svg" width="72" alt="Dolphy logo">
+</p>
 
-Open course library for [Dolphy](https://github.com/dolphy-app). Each top-level directory is a course in the
-KnowledgeBase format (`course_manifest.json`, `<lesson>.lesson/` directories).
+<h1 align="center">Dolphy courses</h1>
+
+<p align="center">
+  <b>Open courses that check your answers by running them.</b><br>
+  Lessons are plain Markdown, exercises are graded automatically.
+</p>
+
+<p align="center">
+  <a href="https://github.com/dolphy-app/courses/actions/workflows/validate.yml"><img src="https://github.com/dolphy-app/courses/actions/workflows/validate.yml/badge.svg?branch=main" alt="Course validation status"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-CC%20BY--NC%204.0-lightgrey" alt="CC BY-NC 4.0 license"></a>
+</p>
+
+<p align="center">
+  <a href="#courses">Courses</a> ·
+  <a href="#add-a-course-to-dolphy">Add to Dolphy</a> ·
+  <a href="CONTRIBUTING.md">Contribute a course</a> ·
+  <a href="https://github.com/dolphy-app/dolphy">Dolphy app</a>
+</p>
+
+The course library for [Dolphy](https://github.com/dolphy-app/dolphy), the desktop app that plans your study as a graph of lessons and schedules reviews with spaced repetition. Each course is a folder of Markdown and JSON files, so you can read it in any editor, keep it in Git and improve it with a pull request.
 
 ## Courses
 
-| Directory     | Course id    | Language | Contents                                                                 |
-| ------------- | ------------ | -------- | ------------------------------------------------------------------------ |
-| `javascript/` | `javascript` | Russian  | The JavaScript language: from variables to async, generators and modules |
+| Course                   | Language | What you get                                                                                                                                 |
+| ------------------------ | -------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| [JavaScript](javascript) | Russian  | The JavaScript language from variables to async, generators and modules: 93 lessons and over 800 exercises, every one checked automatically. |
 
-## Use in Dolphy
+## Add a course to Dolphy
 
-Courses screen → **Add from Git** → `https://github.com/dolphy-app/courses`. The branch field can stay empty
-(default branch). Update the course later from **Settings → Library → Repositories**.
+1. In Dolphy, open **Courses → Add from Git**.
+2. Paste `https://github.com/dolphy-app/courses` and confirm. The branch field can stay empty.
+3. Start learning. Update the course later from **Settings → Library → Repositories**.
 
-The `javascript` course uses two exercise types shipped with the app: `dolphy.choice` (multiple choice) and
-`dolphy.js` (code checked by running tests). Every exercise is checked automatically.
+The JavaScript course uses two exercise types that ship with the app: multiple choice and code that is checked by running tests.
 
-## Validate
+## Contribute
 
-With the monorepo of Dolphy checked out:
-
-```sh
-pnpm -F @dolphy-app/engine engine-cli validate <path-to-this-repo> --run-checks --extensions <dolphy>/apps/desktop/extensions
-```
-
-CI (`.github/workflows/validate.yml`) does the same on every push and pull request to `main`: it builds `engine-cli` and
-the exercise-type extensions from [dolphy-app/dolphy](https://github.com/dolphy-app/dolphy), validates every course and
-runs every reference solution. Any error, any warning (for example an exercise type that no extension provides) or a
-failing reference solution fails the check; problems are annotated on the offending file and line. The workflow can be
-started by hand with a different `dolphy-ref` (tag, branch or commit).
-
-## Exercise format (short)
-
-`dolphy.js` exercises keep the tests and the reference solution inside the exercise front matter, so a course works
-wherever the repository is mounted:
-
-```yaml
----
-engine:
-  exercise:
-    type: dolphy.js
-    spec:
-      starter: |
-        function sum(a, b) {}
-      tests: |
-        test('adds numbers', () => assert.equal(sum(1, 2), 3));
-      reference: |
-        function sum(a, b) { return a + b; }
----
-Write `sum(a, b)`.
-```
-
-Available in `tests`: `test(name, fn)`, `assert` (`node:assert/strict`), `logs` (the learner's `console.log` lines),
-`sleep(ms)`. Learner code and tests run in a fresh Node.js `vm` context with a timeout.
+Found a mistake, or want to write a course? See [CONTRIBUTING.md](CONTRIBUTING.md) for the format, the exercise types and how to validate your course locally.
 
 ## License
 
-CC BY-NC 4.0, see `LICENSE` and `NOTICE` (the course is derived from a non-commercial tutorial).
+[CC BY-NC 4.0](LICENSE). The JavaScript course is derived from a non-commercial tutorial; see [NOTICE](NOTICE).
